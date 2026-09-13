@@ -44,7 +44,7 @@ def root():
     }
 
 
-@app.post("/triage")
+@app.post("/triage", response_model=TriageResponse)
 def triage(request: TriageRequest):
     if os.getenv("LLM_STUB") == "1":
         return TriageResponse(

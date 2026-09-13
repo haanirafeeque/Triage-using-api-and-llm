@@ -10,25 +10,38 @@ def process_model_output(model_output: str):
         data = parse_json(model_output)
         return validate_output(data), 0
 
-    except Exception as first_error:
-        # Repair exactly once
+    except Exception as error:
+        first_error = str(error)
+
+    # Exactly one repair attempt
+    try:
         repaired_output = repair_output(
             original_output=model_output,
-            validation_error=str(first_error),
+            validation_error=first_error,
+        )
+    except Exception as repair_error:
+        quarantine_output(
+            original_output=model_output,
+            repaired_output="",
+            error=str(repair_error),
         )
 
-        # Second attempt
-        try:
-            data = parse_json(repaired_output)
-            return validate_output(data), 1
+        raise ValueError(
+            "Model output could not be repaired."
+        )
 
-        except Exception as second_error:
-            quarantine_output(
-                original_output=model_output,
-                repaired_output=repaired_output,
-                error=str(second_error),
-            )
+    # Second attempt
+    try:
+        data = parse_json(repaired_output)
+        return validate_output(data), 1
 
-            raise ValueError(
-                "Model output failed validation after one repair attempt."
-            )
+    except Exception as second_error:
+        quarantine_output(
+            original_output=model_output,
+            repaired_output=repaired_output,
+            error=str(second_error),
+        )
+
+        raise ValueError(
+            "Model output failed validation after one repair attempt."
+        )
