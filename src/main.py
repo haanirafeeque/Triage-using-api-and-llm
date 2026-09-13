@@ -54,6 +54,14 @@ def triage(request: TriageRequest):
             reason="The customer reports a billing issue.",
         )
 
+    if os.getenv("LLM_ENABLED", "true").lower() != "true":
+        return TriageResponse(
+            category="other",
+            urgency="normal",
+            confidence=0.0,
+            reason="LLM processing is currently disabled.",
+        )
+
     model_output = classify_message(request.text)
 
     try:
