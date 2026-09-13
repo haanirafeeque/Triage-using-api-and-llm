@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
 from src.llm.schema import TriageRequest, TriageResponse
+from src.llm.service import classify_message
 
 load_dotenv()
 
@@ -41,9 +42,9 @@ def root():
     }
 
 
-@app.post("/triage", response_model=TriageResponse)
+@app.post("/triage")
 def triage(request: TriageRequest):
-    if os.getenv("LLM_STUB") == "1":              #if stub == 1 we return our predefined response without contacting llm
+    if os.getenv("LLM_STUB") == "1":
         return TriageResponse(
             category="billing",
             urgency="normal",
@@ -51,9 +52,5 @@ def triage(request: TriageRequest):
             reason="The customer reports a billing issue.",
         )
 
-    return TriageResponse(
-        category="other",
-        urgency="normal",
-        confidence=0.0,
-        reason="LLM integration has not been enabled yet.",
-    )
+    model_output = classify_message(request.text)
+    return model_output
