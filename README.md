@@ -203,13 +203,7 @@ Actual infrastructure cost depends on the hardware and electricity used to run O
 
 When unsure, use `other` with low confidence.
 
-## What I Would Improve
 
-- Test a stronger local model to improve classification accuracy.
-- Expand the evaluation set beyond eight cases.
-- Add adversarial/prompt-injection tests.
-- Improve request-level observability and deployment.
-- Compare a future `triage-v2` prompt against `triage-v1`.
 
 ## Security
 
