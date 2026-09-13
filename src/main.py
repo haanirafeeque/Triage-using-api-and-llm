@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 import os
 from src.llm.schema import TriageRequest, TriageResponse
 from src.llm.service import classify_message
+from fastapi import HTTPException
+from src.llm.pipeline import process_model_output
 
 load_dotenv()
 
@@ -53,4 +55,13 @@ def triage(request: TriageRequest):
         )
 
     model_output = classify_message(request.text)
-    return model_output
+
+    try:
+        result, repair_count = process_model_output(model_output)
+        return result
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        )
