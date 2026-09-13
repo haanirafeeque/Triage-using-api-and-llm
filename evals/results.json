@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-09-13T06:35:17.200632+00:00",
+  "prompt_version": "triage-v1",
+  "model": "gemma3:1b",
+  "cases": 8,
+  "matches": 4,
+  "case_score": 50.0,
+  "category_matches": 4,
+  "urgency_matches": 5,
+  "key_field_score": 56.25,
+  "failures": [
+    {
+      "id": 4,
+      "expected": {
+        "category": "bug",
+        "urgency": "high"
+      },
+      "actual": {
+        "category": "feature",
+        "urgency": "normal"
+      }
+    },
+    {
+      "id": 5,
+      "expected": {
+        "category": "feature",
+        "urgency": "low"
+      },
+      "actual": {
+        "category": "other",
+        "urgency": "normal"
+      }
+    },
+    {
+      "id": 6,
+      "expected": {
+        "category": "feature",
+        "urgency": "low"
+      },
+      "actual": {
+        "category": "billing",
+        "urgency": "normal"
+      }
+    },
+    {
+      "id": 8,
+      "expected": {
+        "category": "other",
+        "urgency": "normal"
+      },
+      "actual": {
+        "category": "billing",
+        "urgency": "normal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "text": "I was charged twice for my subscription.",
+    "expected": {
+      "category": "billing",
+      "urgency": "normal"
+    }
+  },
+  {
+    "id": 2,
+    "text": "My invoice shows an amount I don't recognize.",
+    "expected": {
+      "category": "billing",
+      "urgency": "normal"
+    }
+  },
+  {
+    "id": 3,
+    "text": "The login button crashes the application every time I click it.",
+    "expected": {
+      "category": "bug",
+      "urgency": "high"
+    }
+  },
+  {
+    "id": 4,
+    "text": "The dashboard keeps showing a blank screen after I log in.",
+    "expected": {
+      "category": "bug",
+      "urgency": "high"
+    }
+  },
+  {
+    "id": 5,
+    "text": "Could you add dark mode to the dashboard?",
+    "expected": {
+      "category": "feature",
+      "urgency": "low"
+    }
+  },
+  {
+    "id": 6,
+    "text": "It would be great if I could export my reports as CSV.",
+    "expected": {
+      "category": "feature",
+      "urgency": "low"
+    }
+  },
+  {
+    "id": 7,
+    "text": "Something is wrong with my account and I don't know what happened.",
+    "expected": {
+      "category": "other",
+      "urgency": "normal"
+    }
+  },
+  {
+    "id": 8,
+    "text": "Hello, I just wanted to say thanks for the great service.",
+    "expected": {
+      "category": "other",
+      "urgency": "normal"
+    }
+  }
+]
